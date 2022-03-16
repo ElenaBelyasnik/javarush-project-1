@@ -7,6 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        EncryptFile.inputParam(); // Input key, origFileName, encriptFileName
+        Dialogue.menu1(); // Input key, origFileName, encriptFileName
     }
 }
