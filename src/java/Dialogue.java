@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Dialogue {
-    public static void menu1() throws FileNotFoundException {
+    public static void menu() throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
         int x = 0;
         String s = "";
@@ -40,7 +40,9 @@ public class Dialogue {
                     KeyDecodingFile.decode();
                     break;
                 case 3:
-                    System.out.println("Расшифровка текста с помощью brute force");
+                    System.out.println("Расшифровка текста с помощью brute force:");
+                    // inputParam3(); // !!! раскомментировать при окончании разработки
+                    BrutForce.runAllKeys();
                     break;
                 case 4:
                     System.out.println("Расшифровки с помощью статистического анализа текста");
@@ -56,10 +58,10 @@ public class Dialogue {
             System.out.println("Введите ключ шифрования:");
             EncryptFile.key = Integer.parseInt(reader.readLine());
 
-            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\OrigFile\orig.txt
+            // C:\OrigFile\orig.txt
             System.out.println("Введите путь к файлу, который нужно зашифровать:");
             EncryptFile.origFileName = reader.readLine();
-            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\EncryptFile\encrypt.txt
+            // C:\EncryptFile\encrypt.txt
             System.out.println("Введите путь к файлу, в котором будет зашифрованный текст:");
             EncryptFile.encrFileName = reader.readLine();
         } catch (IOException e) {
@@ -67,22 +69,36 @@ public class Dialogue {
         }
     }
 
-    //** menuItem1: Input key, origFileName, encriptFileName
+    //** menuItem2: Input key, origFileName, encriptFileName
     public static void inputParam2() {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-
             System.out.println("Введите ключ для расшифровки текста:");
             KeyDecodingFile.key = Integer.parseInt(reader.readLine());
 
-            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\EncryptFile\encrypt.txt
+            // C:\EncryptFile\encrypt.txt
             System.out.println("Введите путь к файлу, который нужно расшифровать:");
             KeyDecodingFile.encryptFileName = reader.readLine();
-            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\KeyDecoding\keyDecodedFile.txt
+            // C:\KeyDecoding\keyDecodedFile.txt
             System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
             KeyDecodingFile.keyDecodedFileName = reader.readLine();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
+
+    //** menuItem3: Input key, origFileName, encriptFileName
+    public static void inputParam3() {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            // C:\EncryptFile\encrypt.txt
+            System.out.println("Введите путь к файлу, который нужно расшифровать:");
+            BrutForce.encryptFileName = reader.readLine();
+            // C:\BrutForce\BrutForceFile.txt
+            System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
+            BrutForce.bruteForceDecodedFileName = reader.readLine();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }
