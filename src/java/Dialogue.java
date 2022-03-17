@@ -20,8 +20,6 @@ public class Dialogue {
 
             try {
                 x = Integer.parseInt(s);
-
-
             } catch (NumberFormatException e) {
                 System.out.println("Неверный ввод");
             }
@@ -29,19 +27,19 @@ public class Dialogue {
             switch (x) {
                 case 1:
                     System.out.println("Шифрование:");
-                    // inputParam1(); // !!! раскомментировать при окончании разработки
+                    inputParam1(); // !!! раскомментировать при окончании разработки
                     EncryptFile.initParam();
                     EncryptFile.encrypt();
                     break;
                 case 2:
                     System.out.println("Расшифровка текста с помощью ключа:");
-                    //inputParam2(); // !!! раскомментировать при окончании разработки
+                    inputParam2(); // !!! раскомментировать при окончании разработки
                     KeyDecodingFile.initParam();
                     KeyDecodingFile.decode();
                     break;
                 case 3:
                     System.out.println("Расшифровка текста с помощью brute force:");
-                    // inputParam3(); // !!! раскомментировать при окончании разработки
+                    inputParam3(); // !!! раскомментировать при окончании разработки
                     BrutForce.runAllKeys();
                     break;
                 case 4:
@@ -57,7 +55,6 @@ public class Dialogue {
 
             System.out.println("Введите ключ шифрования:");
             EncryptFile.key = Integer.parseInt(reader.readLine());
-
             // C:\OrigFile\orig.txt
             System.out.println("Введите путь к файлу, который нужно зашифровать:");
             EncryptFile.origFileName = reader.readLine();
