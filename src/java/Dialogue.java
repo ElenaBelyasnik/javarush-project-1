@@ -1,10 +1,11 @@
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Dialogue {
-    public static void menu1() {
+    public static void menu1() throws FileNotFoundException {
         Scanner scan = new Scanner(System.in);
         int x = 0;
         String s = "";
@@ -27,9 +28,9 @@ public class Dialogue {
 
             switch (x) {
                 case 1:
-                    //inputParam1();
+                    System.out.println("Шифрование:");
                     EncryptFile.initParam();
-                    System.out.println("Шифрование");
+                    EncryptFile.encrypt();
                     break;
                 case 2:
                     System.out.println("Расшифровка текста с помощью ключа");
