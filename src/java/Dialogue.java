@@ -29,11 +29,15 @@ public class Dialogue {
             switch (x) {
                 case 1:
                     System.out.println("Шифрование:");
+                    // inputParam1(); // !!! раскомментировать при окончании разработки
                     EncryptFile.initParam();
                     EncryptFile.encrypt();
                     break;
                 case 2:
-                    System.out.println("Расшифровка текста с помощью ключа");
+                    System.out.println("Расшифровка текста с помощью ключа:");
+                    //inputParam2(); // !!! раскомментировать при окончании разработки
+                    KeyDecodingFile.initParam();
+                    KeyDecodingFile.decode();
                     break;
                 case 3:
                     System.out.println("Расшифровка текста с помощью brute force");
@@ -62,4 +66,23 @@ public class Dialogue {
             System.out.println(e.getMessage());
         }
     }
+
+    //** menuItem1: Input key, origFileName, encriptFileName
+    public static void inputParam2() {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+
+            System.out.println("Введите ключ для расшифровки текста:");
+            KeyDecodingFile.key = Integer.parseInt(reader.readLine());
+
+            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\EncryptFile\encrypt.txt
+            System.out.println("Введите путь к файлу, который нужно расшифровать:");
+            KeyDecodingFile.encryptFileName = reader.readLine();
+            // C:\ELENA\JR2\Elena_Belyasnik_JavaRush_Project_1\KeyDecoding\keyDecodedFile.txt
+            System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
+            KeyDecodingFile.keyDecodedFileName = reader.readLine();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }
