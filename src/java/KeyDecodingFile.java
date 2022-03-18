@@ -9,13 +9,18 @@ public class KeyDecodingFile {
     static int key = 0;
     static String encryptFileName = "";
     static String keyDecodedFileName = "";
-/*
-    static int key = 3; // !!! удалить при завершении разработки
-    // !!! удалить при завершении разработки
-    static String encryptFileName = "C:\\ELENA\\JR2\\Elena_Belyasnik_JavaRush_Project_1\\EncryptFile\\encrypt.txt";
-    // !!! удалить при завершении разработки
-    static String keyDecodedFileName = "C:\\ELENA\\JR2\\Elena_Belyasnik_JavaRush_Project_1\\KeyDecoding\\keyDecodedFile.txt";
-*/
+
+    public static void setKey(int key) {
+        KeyDecodingFile.key = key;
+    }
+
+    public static void setEncryptFileName(String encryptFileName) {
+        KeyDecodingFile.encryptFileName = encryptFileName;
+    }
+
+    public static void setKeyDecodedFileName(String keyDecodedFileName) {
+        KeyDecodingFile.keyDecodedFileName = keyDecodedFileName;
+    }
 
     //** Init start params: origFile, encriptFile...
     public static void initParam() {
