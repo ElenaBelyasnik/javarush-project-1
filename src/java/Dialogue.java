@@ -84,6 +84,7 @@ public class Dialogue {
 
         KeyDecodingFile.initParam();
         KeyDecodingFile.decode();
+        System.out.println("Файл расшифрован");
     }
 
     //** Decoding by "Brute Force"
@@ -146,7 +147,7 @@ public class Dialogue {
             }
         }
         // если не указано имя файла
-        if (!Files.isRegularFile(pathForCheck)) {
+        if (!Files.isRegularFile(pathForCheck) | !Files.exists(pathForCheck)) {
             System.err.println("Путь должен содержать имя файла");
             return false;
         }

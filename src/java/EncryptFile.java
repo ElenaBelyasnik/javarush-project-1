@@ -42,7 +42,6 @@ public class EncryptFile {
         ) {
             while (reader.ready()) {
                 String line = reader.readLine().toLowerCase().replace('ё', 'е');
-                System.out.println(line);
                 // посимвольно шифруем строку
                 char[] chars = line.toCharArray();
                 for (int i = 0; i < chars.length; i++) {
