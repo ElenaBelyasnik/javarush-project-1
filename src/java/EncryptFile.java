@@ -41,15 +41,21 @@ public class EncryptFile {
              BufferedWriter writer = new BufferedWriter(new FileWriter(encryptFileName))
         ) {
             while (reader.ready()) {
-                String line = reader.readLine().toLowerCase();
+                String line = reader.readLine().toLowerCase().replace('ё', 'е');
+                System.out.println(line);
                 // посимвольно шифруем строку
                 char[] chars = line.toCharArray();
                 for (int i = 0; i < chars.length; i++) {
-                    for (int j = 0; j < ALPHABET.length; j++) {
-                        if (chars[i] == ALPHABET[j]) {
-                            chars[i] = encrAlphabet[j];
+                    int pos = -1; // position in orig alphabet
+                    for (int posInAlphabet = 0; posInAlphabet < ALPHABET.length; posInAlphabet++) {
+                        if (chars[i] == ALPHABET[posInAlphabet]) {
+                            pos = posInAlphabet;
+                            chars[i] = encrAlphabet[posInAlphabet];
                             break;
                         }
+                    }
+                    if (pos == -1) {
+                        chars[i] = '#';
                     }
                 }
                 // внести зашифрованную строку в файл для зашифрованного текста
