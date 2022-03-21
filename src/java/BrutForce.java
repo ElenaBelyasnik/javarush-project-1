@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -90,11 +91,24 @@ public class BrutForce {
 
     //** Write valid text to file
     public static void writeIntoFile(List<String> list) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(bruteForceDecodedFileName))) {
+/*
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(bruteForceDecodedFileName, StandardCharsets.UTF_8))) {
             for (String s : list) {
                 writer.write(s);
                 writer.newLine();
             }
         }
+*/
+        File file = new File(bruteForceDecodedFileName);
+        file.createNewFile(); // если файл существует - команда игнорируется
+
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file, false);
+             Writer writer = new OutputStreamWriter(new FileOutputStream(bruteForceDecodedFileName, false), StandardCharsets.UTF_8)) {
+            for (String s : list) {
+                writer.write(s + "\n");
+                //writer.write("\n");
+            }
+        }
+
     }
 }
