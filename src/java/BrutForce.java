@@ -8,7 +8,6 @@ public class BrutForce {
             'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
             'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
     static boolean correctText = false;
-    private static List<String> list = new ArrayList<>();
     private static char[] encryptAlphabet = new char[ALPHABET.length];
     private static String encryptedFileName = "";
     private static String bruteForceDecodedFileName = "";
@@ -25,12 +24,12 @@ public class BrutForce {
     public static void checkAllKeys() throws IOException {
         int length = ALPHABET.length;
         for (int key = 0; key < length; key++) {
-
+            List<String> list = new ArrayList<>();
             initEncryptAlphabet(key);
-            readIntoStringArray();
+            readIntoStringArray(list);
 
-            if (checkText()) {
-                writeIntoFile();
+            if (checkText(list)) {
+                writeIntoFile(list);
                 System.out.println("Расшифровка успешно завершена!");
                 break;
             } else if (!correctText & key == length - 1) {
@@ -53,13 +52,14 @@ public class BrutForce {
     }
 
     //** Encrypt original file into ArrayList
-    public static void readIntoStringArray() throws IOException {
+    public static List<String> readIntoStringArray(List<String> list) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(encryptedFileName))) {
             while (reader.ready()) {
                 String line = reader.readLine().toLowerCase();
                 list.add(decode(line));
             }
         }
+        return list;
     }
 
     //** decrypt a string
@@ -78,7 +78,7 @@ public class BrutForce {
 
 
     //** Checks text for correct words
-    public static boolean checkText() {
+    public static boolean checkText(List<String> list) {
         for (String s : list) {
             if (s.contains(" и ")) {
                 correctText = true;
@@ -89,7 +89,7 @@ public class BrutForce {
     }
 
     //** Write valid text to file
-    public static void writeIntoFile() throws IOException {
+    public static void writeIntoFile(List<String> list) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(bruteForceDecodedFileName))) {
             for (String s : list) {
                 writer.write(s);
