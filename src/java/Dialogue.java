@@ -14,7 +14,7 @@ public class Dialogue {
 
     public static void showMenu() throws Exception {
         Scanner scanner = new Scanner(System.in);
-        int selectedMenuItem = 0;
+        int selectedMenuItem;
         String s = "";
 
 
@@ -37,7 +37,7 @@ public class Dialogue {
     }
 
     //** Encrypting by key
-    public static void encrypt() throws Exception{
+    public static void encrypt(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Шифрование");
         System.out.println("Введите ключ шифрования:");
@@ -95,7 +95,7 @@ public class Dialogue {
         System.out.println("Введите путь к файлу, который нужно расшифровать:");
         String fileName1 = scanner.nextLine();
         if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {return;}
-        BrutForce.setEncryptedFileName(scanner.nextLine());
+        BrutForce.setEncryptedFileName(fileName1);
 
         // C:\TEMP\BrutForce\BrutForceFile.txt
         System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");

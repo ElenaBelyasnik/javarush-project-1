@@ -5,10 +5,10 @@ import java.util.List;
 public class BrutForce {
 
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
-            'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-            'ъ', 'ы', 'ь', 'э', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
+            'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
+            'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
     static boolean correctText = false;
-    private static List<String> list = new ArrayList<String>();
+    private static List<String> list = new ArrayList<>();
     private static char[] encryptAlphabet = new char[ALPHABET.length];
     private static String encryptedFileName = "";
     private static String bruteForceDecodedFileName = "";
@@ -33,7 +33,7 @@ public class BrutForce {
                 writeIntoFile();
                 System.out.println("Расшифровка успешно завершена!");
                 break;
-            } else if (key == length - 1) {
+            } else if (!correctText & key == length - 1) {
                 System.out.println("Расшифровка не удалась...");
             }
         }
