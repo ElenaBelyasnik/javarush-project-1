@@ -31,11 +31,11 @@ Some description for JR first project.
 
 Для запуска программы, нужно в коммандном окне ввести комманду c указанием полного пути к jar-файлу проекта: 
 
-**java -jar nameOfJar.jar** 
+    **java -Dfile.encoding=UTF-8 -Dconsole.encoding=UTF-8 -jar nameOfJar.jar** 
 
-### Например: 
+### Например, с указанием доп. параметров кодировки UTF-8: 
 
-*java -jar C:\ELENA\javarush-project-1\out\artifacts\javarush_project_1_jar\javarush-project-1.jar*
+    *java -Dfile.encoding=UTF-8 -Dconsole.encoding=UTF-8 -jar C:\ELENA\javarush-project-1\out\artifacts\javarush_project_1_jar\javarush-project-1.jar*
 
 # Примеры использования и результаты выполнения программы
 
