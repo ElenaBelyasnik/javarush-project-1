@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashSet;
@@ -27,132 +25,125 @@ public class Dialogue {
 
 
             if (selectedMenuItem == ENCRYPTING) {
-                encrypt();
+                encrypt(scanner);
             } else if (selectedMenuItem == KEY_DECODING) {
-                keyDecode();
+                keyDecode(scanner);
             } else if (selectedMenuItem == BRUTE_FORCE) {
-                bruteForceDecode();
+                bruteForceDecode(scanner);
             } else if (selectedMenuItem == STAT_ANALIS) {
-                statAnalisDecode();
+                statAnalisDecode(scanner);
             }
 
         }
+        scanner.close();
         System.out.println("До свидания!");
     }
 
 
     //** Encrypting by key
-    private static void encrypt() throws IOException {
+    private static void encrypt(Scanner scanner) throws IOException {
         System.out.println("Шифрование");
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Введите ключ шифрования:");
-            int key = 0;
-            try {
-                key = Integer.parseInt(reader.readLine());
-            } catch (NumberFormatException e) {
-                System.err.println(e.getMessage());
-                System.out.println("Ошибка при вводе числа");
-                return;
-            }
-
-
-            // C:\TEMP\OrigFile\orig.txt
-            System.out.println("Введите путь к файлу, который нужно зашифровать:");
-            String fileName1 = reader.readLine();
-            if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
-                return;
-            }
-
-            // C:\TEMP\EncryptFile\encrypt.txt
-            System.out.println("Введите путь к файлу, в котором будет зашифрованный текст:");
-            String fileName2 = reader.readLine();
-            if (!checkPath(fileName2)) {
-                return;
-            }
-            EncryptFile.start(key, fileName1, fileName2);
+        int key = 0;
+        System.out.println("Введите ключ шифрования:");
+        try {
+            key = Integer.parseInt(scanner.next());
+        } catch (NumberFormatException e) {
+            System.err.println(e.getMessage());
+            System.out.println("Ошибка при вводе числа");
+            return;
         }
+
+        // C:\TEMP\OrigFile\orig.txt
+        System.out.println("Введите путь к файлу, который нужно зашифровать:");
+        String fileName1 = scanner.next();
+        if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
+            return;
+        }
+
+        // C:\TEMP\EncryptFile\encrypted.txt
+        System.out.println("Введите путь к файлу, в котором будет зашифрованный текст:");
+        String fileName2 = scanner.next();
+        if (!checkPath(fileName2)) {
+            return;
+        }
+        EncryptFile.start(key, fileName1, fileName2);
     }
 
     //** Decoding by key
-    private static void keyDecode() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-
-            System.out.println("Расшифровка текста с помощью ключа");
-            System.out.println("Введите ключ для расшифровки текста:");
-            int key = 0;
-            try {
-                key = Integer.parseInt(reader.readLine());
-            } catch (NumberFormatException e) {
-                System.err.println(e.getMessage());
-                System.out.println("Ошибка при вводе числа");
-                return;
-            }
-            // C:\TEMP\EncryptFile\encrypted.txt
-            System.out.println("Введите путь к файлу, который нужно расшифровать:");
-            String fileName1 = reader.readLine();
-            if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
-                return;
-            }
-
-            // C:\TEMP\KeyDecoding\keyDecoded.txt
-            System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
-            String fileName2 = reader.readLine();
-            if (!checkPath(fileName2)) {
-                return;
-            }
-            KeyDecodingFile.startKeyDecoding(key, fileName1, fileName2);
+    private static void keyDecode(Scanner scanner) throws IOException {
+        System.out.println("Расшифровка текста с помощью ключа");
+        System.out.println("Введите ключ для расшифровки текста:");
+        int key = 0;
+        try {
+            key = Integer.parseInt(scanner.next());
+        } catch (NumberFormatException e) {
+            System.err.println(e.getMessage());
+            System.out.println("Ошибка при вводе числа");
+            return;
         }
+        // C:\TEMP\EncryptFile\encrypted.txt
+        System.out.println("Введите путь к файлу, который нужно расшифровать:");
+        String fileName1 = scanner.next();
+        if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
+            return;
+        }
+
+        // C:\TEMP\KeyDecoding\keyDecoded.txt
+        System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
+        String fileName2 = scanner.next();
+        if (!checkPath(fileName2)) {
+            return;
+        }
+        KeyDecodingFile.startKeyDecoding(key, fileName1, fileName2);
     }
 
     //** Decoding by "Brute Force"
-    private static void bruteForceDecode() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Расшифровка текста с помощью brute force");
-            // C:\TEMP\EncryptFile\encrypted.txt
-            System.out.println("Введите путь к файлу, который нужно расшифровать:");
-            String fileName1 = reader.readLine();
-            if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
-                return;
-            }
-
-            // C:\TEMP\BrutForce\BrutForceFile.txt
-            System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
-            String fileName2 = reader.readLine();
-            if (!checkPath(fileName2)) {
-                return;
-            }
-            KeyDecodingFile.checkAllKeys(fileName1, fileName2);
+    private static void bruteForceDecode(Scanner scanner) throws IOException {
+        System.out.println("Расшифровка текста с помощью brute force");
+        // C:\TEMP\EncryptFile\encrypted.txt
+        System.out.println("Введите путь к файлу, который нужно расшифровать:");
+        String fileName1 = scanner.next();
+        if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
+            return;
         }
+
+        // C:\TEMP\BrutForce\BrutForceFile.txt
+        System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
+        String fileName2 = scanner.next();
+        if (!checkPath(fileName2)) {
+            return;
+        }
+        KeyDecodingFile.checkAllKeys(fileName1, fileName2);
     }
 
+
+
     //** decryption using statistical text analysis
-    private static void statAnalisDecode() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-            System.out.println("Расшифровка с помощью статистического анализа текста");
+    private static void statAnalisDecode(Scanner scanner) throws IOException {
+        System.out.println("Расшифровка с помощью статистического анализа текста");
 
-            // C:\TEMP\StatAnalisys\BigTextForStatAnalisis.txt
-            System.out.println("Введите путь к файлу для сбора статистического анализа:");
-            String fileName1 = reader.readLine();
-            if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
-                return;
-            }
-
-            // C:\TEMP\EncryptFile\encrypted.txt
-            System.out.println("Введите путь к файлу, который нужно расшифровать:");
-            String fileName2 = reader.readLine();
-            if (!checkPath(fileName2) | !checkFileExistense(Path.of(fileName2))) {
-                return;
-            }
-
-            // C:\TEMP\StatAnalisys\DecodedFile.txt
-            System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
-            String fileName3 = reader.readLine();
-            if (!checkPath(fileName3)) {
-                return;
-            }
-
-            StatisticalAnalysis.start(fileName1, fileName2, fileName3);
+        // C:\TEMP\StatAnalisys\BigTextForStatAnalisis.txt
+        System.out.println("Введите путь к файлу для сбора статистического анализа:");
+        String fileName1 = scanner.next();
+        if (!checkPath(fileName1) | !checkFileExistense(Path.of(fileName1))) {
+            return;
         }
+
+        // C:\TEMP\EncryptFile\encrypted.txt
+        System.out.println("Введите путь к файлу, который нужно расшифровать:");
+        String fileName2 = scanner.next();
+        if (!checkPath(fileName2) | !checkFileExistense(Path.of(fileName2))) {
+            return;
+        }
+
+        // C:\TEMP\StatAnalisys\DecodedFile.txt
+        System.out.println("Введите путь к файлу, в котором будет расшифрованный текст:");
+        String fileName3 = scanner.next();
+        if (!checkPath(fileName3)) {
+            return;
+        }
+
+        StatisticalAnalysis.start(fileName1, fileName2, fileName3);
     }
 
 
