@@ -20,7 +20,7 @@ public class KeyDecodingFile {
         return correctText;
     }
 
-    public static void setEncryptAlphabet() {
+    private static void setEncryptAlphabet() {
         int length = encryptAlphabet.length;
         for (int i = 0; i < length; i++) {
             int delta = i + key;
@@ -34,7 +34,7 @@ public class KeyDecodingFile {
 
     public static void startKeyDecoding(int k, String encryptedFileName, String decodedFileName) throws IOException {
         start(k, encryptedFileName, decodedFileName);
-        resume();
+        resume(decodedFileName);
     }
 
     public static void start(int k, String encryptedFileName, String decodedFileName) throws IOException {
@@ -49,17 +49,17 @@ public class KeyDecodingFile {
     }
 
     // проверка текста, если успешно, то пишем в файл
-    public static void resume() throws IOException {
+    public static void resume(String fileName) throws IOException {
 
         if (correctText) {
-            writeIntoFile(list, keyDecodedFileName);
+            writeIntoFile(list, fileName);
             System.out.println("Расшифровка успешно завершена!");
         } else {
             System.out.println("Расшифровка не удалась...");
         }
     }
 
-    //** BrutForce: Go through all the keys until we get the correct text
+    //** BrutForce method: Go through all the keys until we get the correct text
     public static void checkAllKeys(String encryptedFileName, String bruteForceDecodedFileName) throws IOException {
         int length = Main.ALPHABET.length;
         for (int key = 0; key < length; key++) {
@@ -70,6 +70,7 @@ public class KeyDecodingFile {
                 break;
             } else if (key == length - 1) {
                 System.out.println("Расшифровка не удалась...");
+                break;
             }
         }
     }
@@ -89,7 +90,7 @@ public class KeyDecodingFile {
     }
 
     //** Encrypt original file into ArrayList
-    public static List<String> readIntoStringArray(List<String> list, String fileName) throws IOException {
+    private static List<String> readIntoStringArray(List<String> list, String fileName) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             while (reader.ready()) {
                 String line = reader.readLine().toLowerCase();
@@ -99,14 +100,14 @@ public class KeyDecodingFile {
         return list;
     }
 
-    public static void decodeList(List<String> list) {
+    private static void decodeList(List<String> list) {
         for (int lineNum = 0; lineNum < list.size(); lineNum++) {
             decode(list.get(lineNum));
         }
     }
 
     //** decrypt a string
-    public static String decode(String line) {
+    private static String decode(String line) {
         char[] chars = line.toCharArray();
         for (int charsIndex = 0; charsIndex < chars.length; charsIndex++) {
             for (int alphPos = 0; alphPos < encryptAlphabet.length; alphPos++) {

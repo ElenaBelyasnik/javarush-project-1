@@ -25,6 +25,7 @@ public class Dialogue {
             s = scanner.next();
             selectedMenuItem = inputInt(s);
 
+
             if (selectedMenuItem == ENCRYPTING) {
                 encrypt();
             } else if (selectedMenuItem == KEY_DECODING) {
@@ -34,13 +35,14 @@ public class Dialogue {
             } else if (selectedMenuItem == STAT_ANALIS) {
                 statAnalisDecode();
             }
+
         }
         System.out.println("До свидания!");
     }
 
 
     //** Encrypting by key
-    public static void encrypt() throws IOException {
+    private static void encrypt() throws IOException {
         System.out.println("Шифрование");
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Введите ключ шифрования:");
@@ -72,7 +74,7 @@ public class Dialogue {
     }
 
     //** Decoding by key
-    public static void keyDecode() throws IOException {
+    private static void keyDecode() throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
 
             System.out.println("Расшифровка текста с помощью ключа");
@@ -103,7 +105,7 @@ public class Dialogue {
     }
 
     //** Decoding by "Brute Force"
-    public static void bruteForceDecode() throws IOException {
+    private static void bruteForceDecode() throws IOException {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
             System.out.println("Расшифровка текста с помощью brute force");
             // C:\TEMP\EncryptFile\encrypted.txt
@@ -154,7 +156,7 @@ public class Dialogue {
     }
 
 
-    public static int inputInt(String s) {
+    private static int inputInt(String s) {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
@@ -172,7 +174,7 @@ public class Dialogue {
         System.out.println("5. Для выхода из приложения введите 5");
     }
 
-    public static boolean checkPath(String strPath) {
+    private static boolean checkPath(String strPath) {
         HashSet<Path> paths = new HashSet<>(); // список системных папок
         paths.add(Path.of("\\Windows\\").toAbsolutePath());
         paths.add(Path.of("\\Program files\\").toAbsolutePath());

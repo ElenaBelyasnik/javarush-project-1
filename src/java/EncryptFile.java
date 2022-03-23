@@ -6,7 +6,7 @@ public class EncryptFile {
     private static String origFileName = "";
     private static String encryptedFileName = "";
 
-     public static void setEncrAlphabet(int key) {
+    private static void setEncrAlphabet(int key) {
         if (key > Main.ALPHABET.length) key = Main.ALPHABET.length;
         int length = encrAlphabet.length;
         for (int i = 0; i < length; i++) {
@@ -20,16 +20,16 @@ public class EncryptFile {
     }
 
     public static void start(int k, String origFile, String encryptFile) {
-         key = k;
-         origFileName = origFile;
-         encryptedFileName = encryptFile;
+        key = k;
+        origFileName = origFile;
+        encryptedFileName = encryptFile;
 
-         setEncrAlphabet(key);
-         encrypt();
+        setEncrAlphabet(key);
+        encrypt();
     }
 
     //** Encrypt original file
-    public static void encrypt() {
+    private static void encrypt() {
         try (BufferedReader reader = new BufferedReader(new FileReader(origFileName));
              BufferedWriter writer = new BufferedWriter(new FileWriter(encryptedFileName))
         ) {
